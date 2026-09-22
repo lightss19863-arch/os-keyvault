@@ -4,7 +4,7 @@ Cross-platform wrapper for storing encryption keys in the OS credential store in
 
 ## Why this exists
 
-I have a desktop app that encrypts its local SQLite database with SQLCipher. The 256-bit encryption key needs to live somewhere, and writing it to a `.env` file or a config JSON next to the database is basically pointless — if someone has access to the file system, they have access to both the key and the database.
+I have a desktop app that encrypts its local SQLite database with SQLCipher. The 256-bit encryption key needs to live somewhere, and writing it to a `.env` file or a config JSON next to the database is basically pointless if someone has access to the file system, they have access to both the key and the database.
 
 So the key goes into Windows Credential Manager / macOS Keychain / Linux Secret Service via `keyring-rs`. This crate wraps that with a few things I needed:
 
@@ -55,7 +55,7 @@ let key = get_secret("my-app", &key_id).unwrap();
 ## Limitations
 
 - Keys are stored as hex strings, not raw bytes. The OS credential stores are designed for passwords (text), and I didn't want to deal with encoding ambiguity.
-- No key rotation built in — you handle that at the application level.
+- No key rotation built in you handle that at the application level.
 - The manifest system assumes one workspace per directory. If you need multiple encrypted databases in one folder, you'll need to extend it.
 
 ## License

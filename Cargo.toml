@@ -1,0 +1,18 @@
+[package]
+name = "os-keyvault"
+version = "0.1.0"
+edition = "2021"
+description = "Cross-platform OS credential store for desktop apps — keeps encryption keys in the OS keychain instead of on disk"
+license = "MIT"
+repository = "https://github.com/lightss19863-arch/os-keyvault"
+keywords = ["keyring", "keychain", "credential", "encryption", "desktop"]
+categories = ["os", "cryptography"]
+
+[dependencies]
+hex = "0.4"
+keyring = { version = "3", features = ["sync-secret-service", "windows-native", "apple-native"] }
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+zeroize = "1"
